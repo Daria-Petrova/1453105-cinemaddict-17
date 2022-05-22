@@ -17,29 +17,31 @@ export default class FilmsPresenter {
   filmMostComment = new MostCommentedFilmsTemplateView();
   filmListWrapper = new FilmsListWrapperTemplateView();
 
-  init = (filmsContainer) => {
+  init = (filmsContainer, filmsModel) => {
     this.filmsContainer = filmsContainer;
+    this.filmsModel = filmsModel;
+    this.films = [...this.filmsModel.getFilms()];
 
     render(this.filmWrapper,this.filmsContainer);
     render(this.filmListWrapper, this.filmWrapper.getElement());
 
     render(this.filmList, this.filmListWrapper.getElement());
-    for (let i = 0; i < 5 ; i++) {
-      render(new FilmCardTemplateView(), this.filmList.getElement());
+    for (let i = 0; i < this.films.length ; i++) {
+      render(new FilmCardTemplateView(this.films[i]), this.filmList.getElement());
     }
 
     render(new ShowButtonTemplateView(), this.filmWrapper.getElement());
 
-    render(this.filmTopRated,this.filmWrapper.getElement());
-    render(this.topfilmList, this.filmTopRated.getElement());
-    for (let i = 0; i < 2 ; i++) {
-      render(new FilmCardTemplateView(), this.topfilmList.getElement());
-    }
+    // render(this.filmTopRated,this.filmWrapper.getElement());
+    // render(this.topfilmList, this.filmTopRated.getElement());
+    // for (let i = 0; i < 2 ; i++) {
+    //   render(new FilmCardTemplateView(), this.topfilmList.getElement());
+    // }
 
-    render(this.filmMostComment,this.filmWrapper.getElement());
-    render(this.commentfilmList, this.filmMostComment.getElement());
-    for (let i = 0; i < 2 ; i++) {
-      render(new FilmCardTemplateView(), this.commentfilmList.getElement());
-    }
+    // render(this.filmMostComment,this.filmWrapper.getElement());
+    // render(this.commentfilmList, this.filmMostComment.getElement());
+    // for (let i = 0; i < 2 ; i++) {
+    //   render(new FilmCardTemplateView(), this.commentfilmList.getElement());
+    // }
   };
 }
