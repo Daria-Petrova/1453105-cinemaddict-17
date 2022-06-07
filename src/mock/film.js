@@ -1,6 +1,15 @@
+import {getRandomInteger} from '../utils.js';
+
+const generateCommentId = () => {
+  const commentsId = ['42', '32', '96'];
+
+  const randomIndex = getRandomInteger(0, commentsId.length -1 );
+  return commentsId[randomIndex];
+};
+
 export const generateFilm = () => ({
   id: 0,
-  comment: ['42', '32', '96'],
+  comment: [generateCommentId() , generateCommentId()],
   filmInfo: {
     title: 'A Little Pony Without The Carpet',
     alternativeTitle: 'Laziness Who Sold Themselves',

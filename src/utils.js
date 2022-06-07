@@ -18,5 +18,23 @@ const getShortDescription = (text) => {
   return text;
 };
 
+const getRandomInteger = (a = 0, b = 1) => {
+  const lower = Math.ceil(Math.min(a, b));
+  const upper = Math.floor(Math.max(a, b));
 
-export {getYearfromDate, getHours, getMinutes, getShortDescription, getHumaneDate, getRelativeDate};
+  return Math.floor(lower + Math.random() * (upper - lower + 1));
+};
+
+const filterCommentsByIdList = (commentList, idList) => {
+  const preparedList = [];
+  idList.forEach( (j) => {
+    commentList.forEach((i) => {
+      if (j === i.id) {
+        preparedList.push(i);
+      }
+    });
+  });
+  return preparedList;
+};
+
+export {getYearfromDate, getHours, getMinutes, getShortDescription, getHumaneDate, getRelativeDate, getRandomInteger, filterCommentsByIdList};
