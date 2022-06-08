@@ -1,4 +1,4 @@
-import {createElement} from '../render.js';
+import AbstractView from '../framework/view/abstract-view.js';
 import { getHours, getMinutes, getHumaneDate , getRelativeDate, filterCommentsByIdList} from '../utils.js';
 
 const countingComments = (commentList, idList) => {
@@ -30,7 +30,6 @@ const createCommentList = (commentList, idList) => {
     return listTemplate;
   }
 };
-
 
 const createGunreList = (genreList) => {
   let genreTemplate  = '';
@@ -169,13 +168,12 @@ const createDetailedInfoTemplateView = (film = {}, commentList = []) => {
   );
 };
 
-
-export default class FilmInfoTemplateView {
+export default class FilmInfoTemplateView extends AbstractView {
   #film = null;
-  #element = null;
   #commentList = null;
 
   constructor(film, comments) {
+    super();
     this.#film = film;
     this.#commentList = comments;
   }
@@ -184,14 +182,13 @@ export default class FilmInfoTemplateView {
     return createDetailedInfoTemplateView(this.#film, this.#commentList);
   }
 
-  get element() {
-    if (!this.#element) {
-      this.#element = createElement(this.template);
-    }
-    return this.#element;
-  }
+  setCloseFilmClickHandler = (callback) => {
+    this._callback.closeClick = callback;
+    this.element.addEventListener('click', this.#closeFilmHandler);
+  };
 
-  removeElement(){
-    this.#element = null;
-  }
+  #closeFilmHandler = (event) => {
+    event.preventDefault();
+    this._callback.closeClick();
+  };
 }

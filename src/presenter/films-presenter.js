@@ -10,7 +10,7 @@ import ShowFilmsEmptyTemplateView from '../view/films-empty-view.js';
 
 import CommentsModel from '../model/comment-model.js';
 
-import {render} from '../render.js';
+import {render} from '../framework/render.js';
 
 const FILM_COUNT_PER_STEP = 5;
 
@@ -44,8 +44,7 @@ export default class FilmsPresenter {
     this.#renderFilmDesk();
   };
 
-  #handleShowMoreButtonClick = (evt) => {
-    evt.preventDefault();
+  #handleShowMoreButtonClick = () => {
     this.#films.slice(this.#renderedFilmCount, this.#renderedFilmCount + FILM_COUNT_PER_STEP).forEach((film) => this.#renderFilm(film));
     this.#renderedFilmCount += FILM_COUNT_PER_STEP;
     if (this.#renderedFilmCount >= this.#films.length) {
@@ -78,12 +77,12 @@ export default class FilmsPresenter {
       }
     };
 
-    filmComponent.element.querySelector('.film-card__link').addEventListener('click',() => {
+    filmComponent.setShowFilmClickHandler(() => {
       openDetailedFilm();
       document.addEventListener('keydown', onEscKeyDown);
     });
 
-    filmDetailedComponent.element.querySelector('.film-details__close-btn').addEventListener('click', () => {
+    filmDetailedComponent.setCloseFilmClickHandler(() => {
       closeDetailedFilm();
       document.removeEventListener('keydown', onEscKeyDown);
     });
@@ -104,7 +103,7 @@ export default class FilmsPresenter {
       }
       if (this.#films.length > FILM_COUNT_PER_STEP) {
         render(this.#buttonShowMore, this.#filmWrapper.element);
-        this.#buttonShowMore.element.addEventListener('click', this.#handleShowMoreButtonClick);
+        this.#buttonShowMore.setClickHandler(this.#handleShowMoreButtonClick);
       }
     }
   };

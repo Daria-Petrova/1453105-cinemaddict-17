@@ -1,4 +1,4 @@
-import {createElement} from '../render.js';
+import AbstractView from '../framework/view/abstract-view.js';
 
 const createFilmsMostCommentedTemplate = () => (
   `<section class="films-list films-list--extra">
@@ -6,21 +6,8 @@ const createFilmsMostCommentedTemplate = () => (
   </section>`
 );
 
-export default class MostCommentedFilmsTemplateView {
-  #element = null;
-
+export default class MostCommentedFilmsTemplateView extends AbstractView {
   get template() {
     return createFilmsMostCommentedTemplate();
-  }
-
-  get element() {
-    if (!this.#element) {
-      this.#element = createElement(this.template);
-    }
-    return this.#element;
-  }
-
-  removeElement(){
-    this.#element = null;
   }
 }
