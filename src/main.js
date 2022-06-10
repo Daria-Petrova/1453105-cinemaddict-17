@@ -1,5 +1,5 @@
 
-import { render } from './render.js';
+import { render } from './framework/render.js';
 import FilterTemplateView from './view/filter-view.js';
 import FilmsPresenter from './presenter/films-presenter.js';
 import UserStatusTemplateView from './view/user-status-view.js';
