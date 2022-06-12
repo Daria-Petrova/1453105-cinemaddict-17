@@ -1,4 +1,5 @@
 import {getRandomInteger} from '../utils/utils.js';
+import {setRandomBoolean } from '../utils/utils.js';
 
 const generateCommentId = () => {
   const commentsId = ['42', '32', '96'];
@@ -27,5 +28,11 @@ export const generateFilm = () => ({
     genre: ['Comedy', 'Drama'],
     description: 'Oscar-winning film, a war drama about two young people, from the creators of timeless classic "Nu, Pogodi!" and "Alice in Wonderland", with the best fight scenes since Bruce Lee.'
   },
+  userDetails: {
+    watchlist: setRandomBoolean(),
+    alreadyWatched: setRandomBoolean(),
+    watchingDate : '2019-04-12T16:12:32.554Z',
+    favorite : setRandomBoolean()
+  }
 });
 
