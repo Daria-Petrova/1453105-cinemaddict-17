@@ -25,6 +25,8 @@ const getRandomInteger = (a = 0, b = 1) => {
   return Math.floor(lower + Math.random() * (upper - lower + 1));
 };
 
+const setRandomBoolean = () => Boolean(getRandomInteger(0, 1));
+
 const filterCommentsByIdList = (commentList, idList) => {
   const preparedList = [];
   idList.forEach( (j) => {
@@ -37,4 +39,4 @@ const filterCommentsByIdList = (commentList, idList) => {
   return preparedList;
 };
 
-export {getYearfromDate, getHours, getMinutes, getShortDescription, getHumaneDate, getRelativeDate, getRandomInteger, filterCommentsByIdList};
+export {getYearfromDate, getHours, getMinutes, getShortDescription, getHumaneDate, getRelativeDate, getRandomInteger, filterCommentsByIdList , setRandomBoolean};

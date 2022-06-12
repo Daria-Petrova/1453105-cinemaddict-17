@@ -1,5 +1,5 @@
 import AbstractView from '../framework/view/abstract-view.js';
-import { getHours, getMinutes, getHumaneDate , getRelativeDate, filterCommentsByIdList} from '../utils.js';
+import { getHours, getMinutes, getHumaneDate , getRelativeDate, filterCommentsByIdList} from '../utils/utils.js';
 
 const countingComments = (commentList, idList) => {
   if (commentList && idList) {
