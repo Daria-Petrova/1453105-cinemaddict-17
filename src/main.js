@@ -1,9 +1,8 @@
 
 import { render } from './framework/render.js';
 import FilterTemplateView from './view/filter-view.js';
-import FilmsPresenter from './presenter/films-presenter.js';
+import FilmsPresenter from './presenter/film-list-presenter.js';
 import UserStatusTemplateView from './view/user-status-view.js';
-import SortFilmsTemplateView from './view/sort-view.js';
 
 import FilmsModel from './model/films-model.js';
 import { generateFilter } from './mock/filter.js';
@@ -17,6 +16,5 @@ const filmsPresenter = new FilmsPresenter(siteMainElement, filmsModel);
 
 render(new UserStatusTemplateView(), userStatusElement);
 render(new FilterTemplateView(filters), siteMainElement);
-render(new SortFilmsTemplateView(), siteMainElement);
 filmsPresenter.init();
 
