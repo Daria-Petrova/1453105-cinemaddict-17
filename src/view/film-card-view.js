@@ -3,6 +3,7 @@ import { getYearfromDate, getHours, getMinutes, getShortDescription } from '../u
 
 const createFilmCardTemplate = (film) => {
   const { title, release , runtime, description, totalRating, genre, poster}  = film.filmInfo;
+  const { favorite, alreadyWatched, watchlist } = film.userDetails;
 
   const filmTitle = title !== null? title: '';
   const filmRaiting = totalRating !== null? totalRating: '0.0';
@@ -11,6 +12,9 @@ const createFilmCardTemplate = (film) => {
   const filmMinutes = runtime !== null? getMinutes(runtime): '';
   const filmPoster = poster !== null? poster: '';
   const filmDescription = description !== null? getShortDescription(description): '';
+  const filmIsFavorite = favorite? 'film-card__controls-item--active' : '';
+  const filmAlreadyWatched = alreadyWatched? 'film-card__controls-item--active': '';
+  const filmWatchlist = watchlist? 'film-card__controls-item--active': '';
 
 
   return (
@@ -28,9 +32,9 @@ const createFilmCardTemplate = (film) => {
         <span class="film-card__comments">5 comments</span>
       </a>
       <div class="film-card__controls">
-        <button class="film-card__controls-item film-card__controls-item--add-to-watchlist" type="button">Add to watchlist</button>
-        <button class="film-card__controls-item film-card__controls-item--mark-as-watched" type="button">Mark as watched</button>
-        <button class="film-card__controls-item film-card__controls-item--favorite" type="button">Mark as favorite</button>
+        <button class="film-card__controls-item film-card__controls-item--add-to-watchlist ${filmWatchlist}" type="button">Add to watchlist</button>
+        <button class="film-card__controls-item film-card__controls-item--mark-as-watched ${filmAlreadyWatched}" type="button">Mark as watched</button>
+        <button class="film-card__controls-item film-card__controls-item--favorite ${filmIsFavorite}" type="button">Mark as favorite</button>
       </div>
     </article>`
   );
@@ -54,9 +58,39 @@ export default class FilmCardTemplateView extends AbstractView{
     this.element.querySelector('.film-card__link').addEventListener('click', this.#showFilmHandler);
   };
 
+  setFavoriteClickHandler = (callback) => {
+    this._callback.favoriteClick = callback;
+    this.element.querySelector('.film-card__controls-item--favorite').addEventListener('click', this.#favoriteClickHandler);
+  };
+
+  setWatchedClickHandler = (callback) => {
+    this._callback.watchedClick = callback;
+    this.element.querySelector('.film-card__controls-item--mark-as-watched').addEventListener('click', this.#watchedClickHandler);
+  };
+
+  setWatchListClickHandler = (callback) => {
+    this._callback.watchListClick = callback;
+    this.element.querySelector('.film-card__controls-item--add-to-watchlist').addEventListener('click', this.#watchListClickHandler);
+  };
+
+  #favoriteClickHandler = (event) => {
+    event.preventDefault();
+    this._callback.favoriteClick();
+  };
+
+  #watchedClickHandler = (event) => {
+    event.preventDefault();
+    this._callback.watchedClick();
+  };
+
   #showFilmHandler = (event) => {
     event.preventDefault();
     this._callback.showClick();
+  };
+
+  #watchListClickHandler = (event) => {
+    event.preventDefault();
+    this._callback.watchListClick();
   };
 }
 

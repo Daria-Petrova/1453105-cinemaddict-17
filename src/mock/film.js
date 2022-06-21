@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid';
 import {getRandomInteger} from '../utils/utils.js';
 import {setRandomBoolean } from '../utils/utils.js';
 
@@ -8,11 +9,17 @@ const generateCommentId = () => {
   return commentsId[randomIndex];
 };
 
+const generateTitle = () => {
+  const titles = ['The Godfather', 'The Dark Knight', 'Schindlers List', 'The Lord of the Rings','A Little Pony Without The Carpet'];
+  const randomIndex = getRandomInteger(0, titles.length -1 );
+  return titles[randomIndex];
+};
+
 export const generateFilm = () => ({
-  id: 0,
+  id: nanoid(),
   comment: [generateCommentId() , generateCommentId()],
   filmInfo: {
-    title: 'A Little Pony Without The Carpet',
+    title: generateTitle(),
     alternativeTitle: 'Laziness Who Sold Themselves',
     totalRating: 5.3,
     poster: './images/posters/the-dance-of-life.jpg',
